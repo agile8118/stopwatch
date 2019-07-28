@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Stopwatch</title>
+
+    <link
+      href="https://fonts.googleapis.com/css?family=Lato:100,300"
+      rel="stylesheet"
+    />
+    <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png" />
+    <link rel="manifest" href="site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#333333" />
+    <meta name="msapplication-TileColor" content="#00aba9" />
+    <meta name="theme-color" content="#ffffff" />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="noselect">
+    <div class="heading"><h1 class="">Stopwatch</h1></div>
+
+    <div class="box"><div id="js--stopwatch" class="stopwatch"></div></div>
+
+    <div class="actions">
+      <button id="js--start" class="button button-green push-right">
+        Start
+      </button>
+      <button id="js--stop" class="button display-none button-red push-right">
+        Stop
+      </button>
+      <button id="js--reset" class="button button-disabled" disabled>
+        Reset
+      </button>
+    </div>
+
+    <script src="app.js"></script>
+  </body>
+</html>

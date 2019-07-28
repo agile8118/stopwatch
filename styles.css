@@ -1,0 +1,193 @@
+* {
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-family: helvetica;
+  font-size: 62.5%;
+}
+
+html::selection {
+  background: transparent;
+}
+
+body {
+  height: 100vh;
+  background-color: rgb(13, 13, 13);
+  font-family: "Lato", sans-serif;
+  font-weight: 300;
+  position: relative;
+}
+
+.display-none {
+  display: none;
+}
+
+.noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.heading {
+  background-color: rgb(24, 24, 24);
+  text-align: center;
+  display: block;
+  padding: 0.8rem;
+  border-bottom: 1px solid rgb(28, 28, 28);
+}
+
+.heading h1 {
+  font-size: 1.8rem;
+  color: #fff;
+}
+
+.box {
+  display: block;
+  text-align: center;
+  padding-top: 6rem;
+}
+
+.stopwatch {
+  font-size: 12rem;
+  color: #fff;
+  font-weight: 100;
+}
+
+.actions {
+  padding-top: 5rem;
+  width: 50rem;
+  left: 50%;
+  position: absolute;
+  transform: translateX(-50%);
+}
+
+.button {
+  width: 10rem;
+  height: 10rem;
+  border-radius: 500px;
+  font-size: 2rem;
+  font-weight: 300;
+  background-color: rgb(61, 61, 61);
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.button:hover {
+  background-color: rgb(50, 50, 50);
+}
+
+.button:focus,
+.button-green:active {
+  background-color: rgb(37, 37, 37);
+  outline: none;
+}
+
+.button-green {
+  background-color: rgb(32, 53, 33);
+  color: rgb(121, 218, 116);
+}
+
+.button-green:hover {
+  background-color: rgb(28, 40, 28);
+}
+
+.button-green:active,
+.button-green:focus {
+  background-color: rgb(23, 33, 23);
+}
+
+.button-red {
+  background-color: rgb(57, 25, 22);
+  color: rgb(226, 74, 59);
+}
+
+.button-red:hover {
+  background-color: rgb(40, 22, 20);
+}
+
+.button-red:active,
+.button-red:focus {
+  background-color: rgb(35, 17, 16);
+}
+
+.button-disabled {
+  background-color: rgba(20, 20, 20) !important;
+  color: rgb(140, 140, 140) !important;
+  cursor: not-allowed;
+}
+
+.push-right {
+  float: right;
+}
+
+@media only screen and (max-width: 675px) {
+  html {
+    font-size: 55.5%;
+  }
+
+  .box {
+    padding-top: 8rem;
+  }
+}
+
+@media only screen and (max-width: 530px) {
+  html {
+    font-size: 48%;
+  }
+
+  .actions {
+    width: 45rem;
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  html {
+    font-size: 45.5%;
+  }
+
+  .actions {
+    width: 40rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  html {
+    font-size: 40%;
+  }
+
+  .actions {
+    width: 36rem;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  html {
+    font-size: 37%;
+  }
+
+  .actions {
+    width: 32rem;
+  }
+}
+
+@media only screen and (max-width: 315px) {
+  .stopwatch {
+    font-size: 10rem;
+  }
+
+  .button {
+    width: 7rem;
+    height: 7rem;
+  }
+
+  .actions {
+    width: 26rem;
+  }
+}
