@@ -1,6 +1,9 @@
-* {
-  padding: 0;
+*,
+*::after,
+*::before {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 html {
@@ -22,6 +25,10 @@ body {
 
 .display-none {
   display: none;
+}
+
+.push-right {
+  float: right;
 }
 
 .noselect {
@@ -47,7 +54,6 @@ body {
 }
 
 .box {
-  display: block;
   text-align: center;
   padding-top: 6rem;
 }
@@ -83,8 +89,8 @@ body {
   background-color: rgb(50, 50, 50);
 }
 
-.button:focus,
-.button-green:active {
+.button:active,
+.button:focus {
   background-color: rgb(37, 37, 37);
   outline: none;
 }
@@ -117,14 +123,10 @@ body {
   background-color: rgb(35, 17, 16);
 }
 
-.button-disabled {
+.button:disabled {
   background-color: rgba(20, 20, 20) !important;
   color: rgb(140, 140, 140) !important;
   cursor: not-allowed;
-}
-
-.push-right {
-  float: right;
 }
 
 @media only screen and (max-width: 675px) {
