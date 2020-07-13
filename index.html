@@ -19,23 +19,26 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
 
-  <body class="noselect">
+  <body class="u-noselect">
+    <!-- Heading -->
     <div class="heading">
       <h1>Stopwatch</h1>
     </div>
 
-    <div class="box">
-      <div id="js--stopwatch" class="stopwatch"></div>
+    <!-- Actual stopwatch -->
+    <div class="stopwatch-container">
+      <span id="js--stopwatch" class="stopwatch"></span>
     </div>
 
+    <!-- Action buttons -->
     <div class="actions">
-      <button id="js--start" class="button button-green push-right">
+      <button id="js--start" class="btn btn-green u-push-right">
         Start
       </button>
-      <button id="js--stop" class="button button-red push-right display-none">
+      <button id="js--stop" class="btn btn-red u-push-right u-display-none">
         Stop
       </button>
-      <button id="js--reset" class="button" disabled>
+      <button id="js--reset" class="btn btn-default" disabled>
         Reset
       </button>
     </div>

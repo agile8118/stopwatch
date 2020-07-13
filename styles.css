@@ -1,3 +1,6 @@
+/* ------------------------ */
+/* Basics */
+/* ------------------------ */
 *,
 *::after,
 *::before {
@@ -7,7 +10,6 @@
 }
 
 html {
-  font-family: helvetica;
   font-size: 62.5%;
 }
 
@@ -18,20 +20,22 @@ html::selection {
 body {
   height: 100vh;
   background-color: rgb(13, 13, 13);
-  font-family: "Lato", sans-serif;
+  font-family: "Lato", sans-serif, helvetica;
   font-weight: 300;
-  position: relative;
 }
 
-.display-none {
+/* ------------------------ */
+/* Utility classes */
+/* ------------------------ */
+.u-display-none {
   display: none;
 }
 
-.push-right {
+.u-push-right {
   float: right;
 }
 
-.noselect {
+.u-noselect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
   -khtml-user-select: none;
@@ -40,10 +44,12 @@ body {
   user-select: none;
 }
 
+/* ------------------------ */
+/* App */
+/* ------------------------ */
 .heading {
   background-color: rgb(24, 24, 24);
   text-align: center;
-  display: block;
   padding: 0.8rem;
   border-bottom: 1px solid rgb(28, 28, 28);
 }
@@ -53,9 +59,9 @@ body {
   color: #fff;
 }
 
-.box {
+.stopwatch-container {
   text-align: center;
-  padding-top: 6rem;
+  margin-top: 6rem;
 }
 
 .stopwatch {
@@ -65,77 +71,89 @@ body {
 }
 
 .actions {
-  padding-top: 5rem;
+  margin-top: 5rem;
   width: 50rem;
-  left: 50%;
   position: absolute;
+  left: 50%;
   transform: translateX(-50%);
 }
 
-.button {
+/* ------------------------ */
+/* Buttons */
+/* ------------------------ */
+.btn {
   width: 10rem;
   height: 10rem;
   border-radius: 500px;
   font-size: 2rem;
-  font-weight: 300;
-  background-color: rgb(61, 61, 61);
   border: none;
-  color: #fff;
   cursor: pointer;
   transition: all 0.1s;
 }
 
-.button:hover {
-  background-color: rgb(50, 50, 50);
-}
-
-.button:active,
-.button:focus {
-  background-color: rgb(37, 37, 37);
+.btn:active,
+.btn:focus {
   outline: none;
 }
 
-.button-green {
+.btn-default {
+  background-color: rgb(61, 61, 61);
+  color: #fff;
+}
+
+.btn-default:hover {
+  background-color: rgb(50, 50, 50);
+}
+
+.btn-default:active,
+.btn-default:focus {
+  background-color: rgb(37, 37, 37);
+}
+
+.btn-green {
   background-color: rgb(32, 53, 33);
   color: rgb(121, 218, 116);
 }
 
-.button-green:hover {
+.btn-green:hover {
   background-color: rgb(28, 40, 28);
 }
 
-.button-green:active,
-.button-green:focus {
+.btn-green:active,
+.btn-green:focus {
   background-color: rgb(23, 33, 23);
 }
 
-.button-red {
+.btn-red {
   background-color: rgb(57, 25, 22);
   color: rgb(226, 74, 59);
 }
 
-.button-red:hover {
+.btn-red:hover {
   background-color: rgb(40, 22, 20);
 }
 
-.button-red:active,
-.button-red:focus {
+.btn-red:active,
+.btn-red:focus {
   background-color: rgb(35, 17, 16);
 }
 
-.button:disabled {
-  background-color: rgba(20, 20, 20) !important;
-  color: rgb(140, 140, 140) !important;
+.btn:disabled {
+  background-color: rgba(20, 20, 20);
+  color: rgb(140, 140, 140);
   cursor: not-allowed;
 }
 
+/* ------------------------ */
+/* Media Queries */
+/* ------------------------ */
 @media only screen and (max-width: 675px) {
   html {
     font-size: 55.5%;
   }
 
-  .box {
-    padding-top: 8rem;
+  .stopwatch-container {
+    margin-top: 8rem;
   }
 }
 
@@ -184,7 +202,7 @@ body {
     font-size: 10rem;
   }
 
-  .button {
+  .btn {
     width: 7rem;
     height: 7rem;
   }
