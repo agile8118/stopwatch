@@ -13,10 +13,6 @@ html {
   font-size: 62.5%;
 }
 
-html::selection {
-  background: transparent;
-}
-
 body {
   height: 100vh;
   background-color: rgb(13, 13, 13);
@@ -25,7 +21,7 @@ body {
 }
 
 /* ------------------------ */
-/* Utility classes */
+/* Utility Classes */
 /* ------------------------ */
 .u-display-none {
   display: none;
@@ -35,6 +31,8 @@ body {
   float: right;
 }
 
+/* When we add this class to an element,
+ it will disable the text selection on that. */
 .u-noselect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -51,12 +49,12 @@ body {
   background-color: rgb(24, 24, 24);
   text-align: center;
   padding: 0.8rem;
-  border-bottom: 1px solid rgb(28, 28, 28);
+  border-bottom: 2px solid rgb(28, 28, 28);
 }
 
 .heading h1 {
   font-size: 1.8rem;
-  color: #fff;
+  color: white;
 }
 
 .stopwatch-container {
@@ -71,7 +69,7 @@ body {
 }
 
 .actions {
-  margin-top: 5rem;
+  margin-top: 6rem;
   width: 50rem;
   position: absolute;
   left: 50%;
@@ -139,7 +137,7 @@ body {
 }
 
 .btn:disabled {
-  background-color: rgba(20, 20, 20);
+  background-color: rgb(20, 20, 20);
   color: rgb(140, 140, 140);
   cursor: not-allowed;
 }
@@ -149,7 +147,7 @@ body {
 /* ------------------------ */
 @media only screen and (max-width: 675px) {
   html {
-    font-size: 55.5%;
+    font-size: 56.25%;
   }
 
   .stopwatch-container {
@@ -183,17 +181,14 @@ body {
   }
 
   .actions {
-    width: 36rem;
+    width: 100%;
+    padding: 0 4rem;
   }
 }
 
 @media only screen and (max-width: 350px) {
   html {
     font-size: 37%;
-  }
-
-  .actions {
-    width: 32rem;
   }
 }
 
@@ -205,9 +200,5 @@ body {
   .btn {
     width: 7rem;
     height: 7rem;
-  }
-
-  .actions {
-    width: 26rem;
   }
 }

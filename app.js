@@ -1,17 +1,15 @@
 (function () {
   // Start button
-  let startButton = document.querySelector("#js--start");
+  var startButton = document.querySelector("#js--start");
   // Stop button
-  let stopButton = document.querySelector("#js--stop");
+  var stopButton = document.querySelector("#js--stop");
   // Reset button
-  let resetButton = document.querySelector("#js--reset");
+  var resetButton = document.querySelector("#js--reset");
   // Stopwatch, the element which will show the time
-  let stopwatch = document.querySelector("#js--stopwatch");
+  var stopwatch = document.querySelector("#js--stopwatch");
 
-  // Global variables to use for the stopwatch
-  let centiseconds = 0; // Each centisecond is 1 percent of a second
-  let seconds = 0;
-  let minutes = 0;
+  // Variable to use for the stopwatch time
+  var time = 0; // 78900 => centiseconds: 90 seconds: 18 minutes: 1
 
   // Show an element on the screen
   function hide(element) {
@@ -23,7 +21,7 @@
     element.classList.remove("u-display-none");
   }
 
-  // Toggle disable attribute of an element
+  // Make an element disabled or enabled
   function disable(element, boolean) {
     if (boolean) {
       element.disabled = true;
@@ -33,101 +31,123 @@
   }
 
   // Format and display the time on the screen
-  function display(centiseconds, seconds, minutes) {
-    var formattedCentiseconds = "";
-    var formattedSeconds = "";
-    var formattedMinutes = "";
+  function display(time) {
+    var centiseconds = Math.floor((time % 1000) / 10);
+    var seconds = Math.floor(time / 1000) % 60;
+    var minutes = Math.floor(Math.floor(time / 1000) / 60);
 
-    // Format centiseconds before shown on the screen
+    // Format centisecond before shown on the screen
     if (centiseconds < 10) {
-      // If centiseconds are less than 10, add a zero before the centiseconds in string
-      formattedCentiseconds = "0" + centiseconds.toString();
+      // If centiseconds is less than 10, add a zero before the centiseconds in string
+      centiseconds = "0" + centiseconds.toString();
     } else {
       // Otherwise just show the centiseconds
-      formattedCentiseconds = centiseconds.toString();
+      centiseconds = centiseconds.toString();
     }
 
     // Format seconds before shown on the screen
     if (seconds < 10) {
-      // If seconds are less than 10, add a zero before the seconds in string
-      formattedSeconds = "0" + seconds.toString();
+      // If seconds is less than 10, add a zero before the seconds in string
+      seconds = "0" + seconds.toString();
     } else {
       // Otherwise just show the seconds
-      formattedSeconds = seconds.toString();
+      seconds = seconds.toString();
     }
 
     // Format minutes before shown on the screen
     if (minutes < 10) {
-      // If minutes are less than 10, add a zero before the minutes in string
-      formattedMinutes = "0" + minutes.toString();
+      // If minutes is less than 10, add a zero before the minutes in string
+      minutes = "0" + minutes.toString();
     } else {
       // Otherwise just show the minutes
-      formattedMinutes = minutes.toString();
+      minutes = minutes.toString();
     }
 
-    stopwatch.innerHTML =
-      formattedMinutes + ":" + formattedSeconds + "." + formattedCentiseconds;
+    // Update the UI
+    stopwatch.innerHTML = minutes + ":" + seconds + "." + centiseconds;
   }
 
-  // Initialize and display the stopwatch
-  display(0, 0, 0);
+  display(0);
 
-  // When start button gets clicked
-  // Users can only see this button while the stopwatch is paused
+  var stopwatchTimerId;
+
+  // When the start button gets clicked.
+  // Users can only see this button whenever the stopwatch is NOT running
   startButton.addEventListener("click", function () {
-    // Change the buttons
     hide(startButton);
     show(stopButton);
     disable(resetButton, true);
 
-    // Start the stopwatch, this function will run 100 times a second
-    let stopwatch = setInterval(function () {
-      // Increment centiseconds by one
-      centiseconds = centiseconds + 1;
+    /* 
+      // This is how to start a worker and send and receive data from it:
+      if (window.Worker) {
+        timer = new Worker("timer.js");
+        timer.postMessage({
+          centiseconds: centiseconds,
+          seconds: seconds,
+          minutes: minutes,
+        });
+        timer.onmessage = function (e) {
+          // Format and display the final time
+          centiseconds = e.data.centiseconds;
+          seconds = e.data.seconds;
+          minutes = e.data.minutes;
+          display(minutes, seconds, centiseconds);
+        };
+      }
+    */
 
-      // If centiseconds are equal to 100, reset the centiseconds and increment
-      // seconds by one
-      if (centiseconds === 100) {
-        centiseconds = 0;
-        seconds = seconds + 1;
+    var startTime = new Date(),
+      currentTime,
+      actualTime,
+      toAdd = 0;
+
+    stopwatchTimerId = setInterval(function () {
+      currentTime = new Date();
+      actualTime = currentTime - startTime + toAdd;
+
+      // Increment our time variable by 10ms (1 centisecond) at each interval
+      time = time + 10;
+
+      if (actualTime - time !== 0) {
+        if (actualTime - time < -10) {
+          // We'll run this after we had a pause
+          toAdd = time - actualTime;
+        } else {
+          time = actualTime;
+        }
       }
 
-      // If seconds are equal to 60, reset the seconds and increment minutes by one
-      if (seconds === 60) {
-        seconds = 0;
-        minutes = minutes + 1;
-      }
-
-      // Format and display the final time
-      display(centiseconds, seconds, minutes);
+      display(time);
     }, 10);
-
-    // When stop button gets clicked
-    // Users can only see this button while the stopwatch is running
-    stopButton.addEventListener("click", function () {
-      // Change the buttons
-      hide(stopButton);
-      show(startButton);
-      disable(resetButton, false);
-
-      // Stop the stopwatch, the 'stopwatch' value that gets passed on is the setInterval function
-      clearInterval(stopwatch);
-    });
   });
 
-  // When reset button gets clicked
-  // Users can only see this button if the stopwatch stops while running
-  resetButton.addEventListener("click", function () {
-    // Change the buttons
+  // When the stop button gets clicked.
+  // Users can only see this button while the stopwatch is running
+  stopButton.addEventListener("click", function () {
     hide(stopButton);
+    show(startButton);
+    disable(resetButton, false);
+
+    /* 
+      // This is how we can terminate a worker:
+      if (timer) {
+        timer.terminate();
+        timer = null;
+      }
+    */
+
+    if (stopwatchTimerId) clearInterval(stopwatchTimerId);
+  });
+
+  // When the reset button gets clicked.
+  // Users can only see this button if the stopwatch is stopped and has a value
+  resetButton.addEventListener("click", function () {
     disable(resetButton, true);
 
-    // Reset the global variables
-    centiseconds = 0;
-    seconds = 0;
-    minutes = 0;
+    // Reset the timer value
+    time = 0;
 
-    // Display the time
-    display(0, 0, 0);
+    display(0);
   });
 })();

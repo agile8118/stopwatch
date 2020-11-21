@@ -1,6 +1,6 @@
 # stopwatch
 
-A simple stopwatch app written only in pure css and javascript, no framework/library whatsoever.
+A simple stopwatch app written with vanilla css and javascript, no frameworks/libraries whatsoever.
 
 ## How to run the app
 
